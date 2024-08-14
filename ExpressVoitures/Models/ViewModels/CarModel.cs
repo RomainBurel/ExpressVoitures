@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace ExpressVoitures.ViewModels
+namespace ExpressVoitures.Models.ViewModels
 {
     public class CarModel
     {

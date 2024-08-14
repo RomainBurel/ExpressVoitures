@@ -1,6 +1,6 @@
 ﻿using ExpressVoitures.Models.Entities;
 using ExpressVoitures.Models.Repositories;
-using ExpressVoitures.ViewModels;
+using ExpressVoitures.Models.ViewModels;
 
 namespace ExpressVoitures.Services
 {

@@ -1,4 +1,4 @@
-﻿using ExpressVoitures.ViewModels;
+﻿using ExpressVoitures.Models.ViewModels;
 
 namespace ExpressVoitures.Services
 {
