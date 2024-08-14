@@ -1,5 +1,6 @@
 ﻿using ExpressVoitures.Models.ViewModels;
 using ExpressVoitures.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,15 +38,17 @@ namespace ExpressVoitures.Controllers
             return View(car);
         }
 
-        // GET: Cars/Create
-        public IActionResult Create()
+		[Authorize(Roles = "Admin")]
+		// GET: Cars/Create
+		public IActionResult Create()
         {
-            var carModel = new CarModel { Year = 2016, DateOfBuy = DateTime.Today };
+            var carModel = new CarModel { Year = 1990, DateOfBuy = DateTime.Today };
             return View(carModel);
         }
 
-        // POST: Cars/Create
-        [HttpPost]
+		[Authorize(Roles = "Admin")]
+		// POST: Cars/Create
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(CarModel carModel)
         {
@@ -58,8 +61,9 @@ namespace ExpressVoitures.Controllers
             return View(carModel);
         }
 
-        // GET: Cars/Edit/5
-        public IActionResult Edit(int? id)
+		[Authorize(Roles = "Admin")]
+		// GET: Cars/Edit/5
+		public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -74,8 +78,9 @@ namespace ExpressVoitures.Controllers
             return View(car);
         }
 
-        // POST: Cars/Edit/5
-        [HttpPost]
+		[Authorize(Roles = "Admin")]
+		// POST: Cars/Edit/5
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, CarModel carModel)
         {
@@ -107,8 +112,9 @@ namespace ExpressVoitures.Controllers
             return View(carModel);
         }
 
-        // GET: Cars/Delete/5
-        public IActionResult Delete(int? id)
+		[Authorize(Roles = "Admin")]
+		// GET: Cars/Delete/5
+		public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -123,8 +129,9 @@ namespace ExpressVoitures.Controllers
             return View(car);
         }
 
-        // POST: Cars/Delete/5
-        [HttpPost]
+		[Authorize(Roles = "Admin")]
+		// POST: Cars/Delete/5
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, CarModel carModel)
         {

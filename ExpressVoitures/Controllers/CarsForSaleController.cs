@@ -1,5 +1,6 @@
 ﻿using ExpressVoitures.Models.ViewModels;
 using ExpressVoitures.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,8 +38,9 @@ namespace ExpressVoitures.Controllers
             return View(carForSale);
         }
 
-        // GET: CarsForSale/Create
-        public IActionResult Create()
+		// GET: CarsForSale/Create
+		[Authorize(Roles = "Admin")]
+		public IActionResult Create()
         {
             var viewModel = new CarForSaleModel()
             {
@@ -49,22 +51,24 @@ namespace ExpressVoitures.Controllers
             return View(viewModel);
         }
 
-        // POST: CarsForSale/Create
-        [HttpPost]
+		// POST: CarsForSale/Create
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CarForSaleModel carForSaleModel, IFormFile image)
+        public IActionResult Create(CarForSaleModel carForSaleModel)
         {
             if (ModelState.IsValid)
             {
-                this._carForSaleService.Add(carForSaleModel, image);
+                this._carForSaleService.Add(carForSaleModel, null);
                 this._carForSaleService.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(carForSaleModel);
         }
 
-        // GET: CarsForSale/Edit/5
-        public IActionResult Edit(int? id)
+		// GET: CarsForSale/Edit/5
+		[Authorize(Roles = "Admin")]
+		public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -79,8 +83,9 @@ namespace ExpressVoitures.Controllers
             return View(carForSaleModel);
         }
 
-        // POST: CarsForSale/Edit/5
-        [HttpPost]
+		// POST: CarsForSale/Edit/5
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, CarForSaleModel carForSaleModel)
         {
@@ -112,8 +117,9 @@ namespace ExpressVoitures.Controllers
             return View(carForSaleModel);
         }
 
-        // GET: CarsForSale/Delete/5
-        public IActionResult Delete(int? id)
+		// GET: CarsForSale/Delete/5
+		[Authorize(Roles = "Admin")]
+		public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -128,8 +134,9 @@ namespace ExpressVoitures.Controllers
             return View(carForSale);
         }
 
-        // POST: CarsForSale/Delete/5
-        [HttpPost]
+		// POST: CarsForSale/Delete/5
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, CarForSaleModel carForSaleModel)
         {
