@@ -1,0 +1,60 @@
+﻿@model ExpressVoitures.Models.ViewModels.CarForSaleModel
+
+@{
+    ViewData["Title"] = "Modifier une annonce";
+}
+
+<h1>Modificer une annonce</h1>
+
+<h4>@Html.DisplayFor(model => model.CarLabel)</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdCar" />
+            <input type="hidden" asp-for="IdCarForSale" />
+            <div class="form-group">
+                <label asp-for="DateOfAvailabilityForSale" class="control-label"></label>
+                <input asp-for="DateOfAvailabilityForSale" class="form-control" />
+                <span asp-validation-for="DateOfAvailabilityForSale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SellingPrice" class="control-label"></label><br />
+                @Html.DisplayFor(model => model.SellingPrice)
+                <span asp-validation-for="SellingPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for=ImagePath class="control-label"></label>
+                <input asp-for=ImagePath type ="file" name="file" class="form-control" />
+            </div>
+            @if (Model.ImagePath != null)
+            {
+                <div class="my-2 w-25">
+                    <img src="~/@Model.ImagePath" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="DateOfSale" class="control-label"></label>
+                <input asp-for="DateOfSale" class="form-control" />
+                <span asp-validation-for="DateOfSale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Enregistrer" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retour</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

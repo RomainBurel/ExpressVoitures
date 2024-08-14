@@ -1,0 +1,43 @@
+﻿@model ExpressVoitures.Models.ViewModels.CarModel
+
+@{
+    ViewData["Title"] = "Supprimer une voiture";
+}
+
+<h1>Spprimer une voiture</h1>
+
+<h3>Supprimer la voiture suivante ?</h3>
+<div>
+    <h4>Sale</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.VIN)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.VIN)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Year)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Year)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Brand)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Brand)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Model)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Model)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Finish)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Finish)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.DateOfBuy)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DateOfBuy)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Price)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Price)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.RepairDescription)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.RepairDescription)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.DateOfRepair)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DateOfRepair)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.RepairCost)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.RepairCost)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.NoMoreAvailable)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.NoMoreAvailable)</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdCar" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

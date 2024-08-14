@@ -1,0 +1,71 @@
+﻿@model ExpressVoitures.Models.ViewModels.CarForSaleModel
+
+@{
+    ViewData["Title"] = "Ajouter une voiture en vente";
+}
+
+<h1>Ajouter une voiture en vente</h1>
+
+<h4>Informations</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <input type="hidden" asp-for="IdCar" />
+            <input type="hidden" asp-for="IdCarForSale" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group required mb-4">
+                <label asp-for="IdCar" class="control-label"></label>
+                @if (Model.Cars != null && Model.Cars.Any())
+                {
+                    <select asp-for="IdCar" class="form-control">
+                        @foreach (var car in Model.Cars)
+                        {
+                            <option value="@car.IdCar">@car.Brand @car.Model @car.Finish @car.VIN</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <p class="text-danger">Aucune voiture n'est disponible.</p>
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfAvailabilityForSale" class="control-label"></label>
+                @Html.TextBoxFor(x => x.DateOfAvailabilityForSale, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                <span asp-validation-for="DateOfAvailabilityForSale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for=ImagePath class="control-label"></label>
+                <input asp-for=ImagePath type="file" name="file" class="form-control" />
+            </div>
+            @if (Model.ImagePath != null)
+            {
+                <div class="my-2 w-25">
+                    <img src="~/@Model.ImagePath" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="DateOfSale" class="control-label"></label>
+                @Html.TextBoxFor(x => x.DateOfSale, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                <span asp-validation-for="DateOfSale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ajouter" class="btn btn-primary form-control" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retour</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

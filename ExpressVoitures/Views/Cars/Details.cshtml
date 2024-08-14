@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model ExpressVoitures.Models.ViewModels.CarModel
+
+@{
+    ViewData["Title"] = "Voiture";
+}
+
+<h1>Voiture</h1>
+
+<div>
+    <h4>Informations</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.VIN)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.VIN)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.Year)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.Year)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.Brand)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.Brand)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.Model)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.Model)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.Finish)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.Finish)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.DateOfBuy)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.DateOfBuy)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.Price)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.Price)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.RepairDescription)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.RepairDescription)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.DateOfRepair)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.DateOfRepair)</dd>
+        <dt class = "col-sm-2">@Html.DisplayNameFor(model => model.RepairCost)</dt>
+        <dd class = "col-sm-10">@Html.DisplayFor(model => model.RepairCost)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.NoMoreAvailable)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.NoMoreAvailable)</dd>
+    </dl>
+</div>
+<div>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.IdCar">Modifier</a>
+    }
+</div>
+<div>
+    <a asp-action="Index">Retour</a>
+</div>

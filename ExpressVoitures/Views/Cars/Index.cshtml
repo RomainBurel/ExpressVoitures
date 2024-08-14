@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model IEnumerable<ExpressVoitures.Models.ViewModels.CarModel>
+
+@{
+    ViewData["Title"] = "Inventaire des voitures";
+}
+
+<h1>Liste</h1>
+
+<p>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <a asp-action="Create">Ajouter une nouvelle voiture</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.VIN)</th>
+            <th>@Html.DisplayNameFor(model => model.Year)</th>
+            <th>@Html.DisplayNameFor(model => model.Brand)</th>
+            <th>@Html.DisplayNameFor(model => model.Model)</th>
+            <th>@Html.DisplayNameFor(model => model.Finish)</th>
+            <th>@Html.DisplayNameFor(model => model.DateOfBuy)</th>
+            <th>@Html.DisplayNameFor(model => model.Price)</th>
+            <th>@Html.DisplayNameFor(model => model.RepairDescription)</th>
+            <th>@Html.DisplayNameFor(model => model.DateOfRepair)</th>
+            <th>@Html.DisplayNameFor(model => model.RepairCost)</th>
+            <th>@Html.DisplayNameFor(model => model.NoMoreAvailable)</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.VIN)</td>
+            <td>@Html.DisplayFor(modelItem => item.Year)</td>
+            <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+            <td>@Html.DisplayFor(modelItem => item.Model)</td>
+            <td>@Html.DisplayFor(modelItem => item.Finish)</td>
+            <td>@Html.DisplayFor(modelItem => item.DateOfBuy)</td>
+            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            <td>@Html.DisplayFor(modelItem => item.RepairDescription)</td>
+            <td>@Html.DisplayFor(modelItem => item.DateOfRepair)</td>
+            <td>@Html.DisplayFor(modelItem => item.RepairCost)</td>
+            <td>@Html.DisplayFor(modelItem => item.NoMoreAvailable)</td>
+            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdCar">Modifier</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdCar">Supprimer</a>
+                </td>
+            }
+				<td><a asp-action="Details" asp-route-id="@item.IdCar">Voir</a></td>
+			</tr>
+}
+    </tbody>
+</table>

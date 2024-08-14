@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model IEnumerable<ExpressVoitures.Models.ViewModels.CarForSaleModel>
+
+@{
+    ViewData["Title"] = "Liste des voitures en vente";
+}
+
+<h1>Liste des voitures en vente</h1>
+
+<p>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <a asp-action="Create">Ajouter une voiture en vente</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CarLabel)</th>
+            <th>@Html.DisplayNameFor(model => model.DateOfAvailabilityForSale)</th>
+            <th>@Html.DisplayNameFor(model => model.SellingPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>@Html.DisplayNameFor(model => model.ImagePath)</th>
+            <th>@Html.DisplayNameFor(model => model.DateOfSale)</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        @Html.HiddenFor(modelItem => item.IdCarForSale)
+        @Html.HiddenFor(modelItem => item.IdCar)
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.CarLabel)</td>
+            <td>@Html.DisplayFor(modelItem => item.DateOfAvailabilityForSale)</td>
+            <td>@Html.DisplayFor(modelItem => item.SellingPrice)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.ImagePath)</td>
+            <td>@Html.DisplayFor(modelItem => item.DateOfSale)</td>
+            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdCarForSale">Modifier</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdCarForSale">Supprimer</a>
+                </td>
+            }
+            <td><a asp-action="Details" asp-route-id="@item.IdCarForSale">Voir</a></td>
+        </tr>
+}
+    </tbody>
+</table>

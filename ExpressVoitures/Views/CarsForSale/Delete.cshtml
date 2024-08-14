@@ -1,0 +1,33 @@
+﻿@model ExpressVoitures.Models.ViewModels.CarForSaleModel
+
+@{
+    ViewData["Title"] = "Supprimer une voiture en vente";
+}
+
+<h1>Supprimer une voiture en vente</h1>
+
+<h3>Supprimer la voiture en vente suivante ?</h3>
+<div>
+    <h4>Sale</h4>
+    <hr />
+    <dl class="row">
+        @Html.HiddenFor(model => model.IdCarForSale)
+        @Html.HiddenFor(model => model.IdCar)
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.CarLabel)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.CarLabel)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.DateOfAvailabilityForSale)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DateOfAvailabilityForSale)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.SellingPrice)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.SellingPrice)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Description)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Description)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.DateOfSale)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.DateOfSale)</dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdCarForSale" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
