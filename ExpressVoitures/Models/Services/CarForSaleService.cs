@@ -91,6 +91,7 @@ namespace ExpressVoitures.Services
                 ImagePath = carForSale.ImagePath,
                 DateOfSale = carForSale.DateOfSale,
                 Cars = this.GetCarsAvailable(),
+                Car = this.GetCar(carForSale.IdCar),
                 CarLabel = this.GetCarLabelForSale(carForSale.IdCar)
             };
         }
@@ -124,6 +125,17 @@ namespace ExpressVoitures.Services
 
             var car = this._carRepository.GetById(idCar.Value);
             return car != null ? car.Brand + " " + car.Model + " " + car.Finish + " " + car.VIN : "";
+        }
+
+        private Car GetCar(int? idCar)
+        {
+            if (idCar == null)
+            {
+                return null;
+            }
+
+            var car = this._carRepository.GetById(idCar.Value);
+            return car;
         }
     }
 }
